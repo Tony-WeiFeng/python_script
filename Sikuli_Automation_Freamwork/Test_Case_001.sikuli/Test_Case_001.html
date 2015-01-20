@@ -1,0 +1,167 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }  
+         
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>Test_Case_001.sikuli\Test_Case_001.sikuli</h2> <a href="Test_Case_001.sikuli\Test_Case_001.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> os
+<span class="kw">import</span> time
+
+<span class="cmt">#Clear this machine
+</span><span class="cmt">#Delete UI folder
+</span>os.system(<span class="str">'rd /s/q C:\\ProgramData\\Autodesk\\SampleApp_test'</span>)
+os.system(<span class="str">'rd /s/q C:\\ProgramData\\Autodesk\\MC3'</span>)
+
+<span class="cmt">#Delete UD folder
+</span>os.system(<span class="str">'rd /s/q C:\\Users\\Administrator\\AppData\\Roaming\\Autodesk\\SampleApp_test'</span>)
+os.system(<span class="str">'rd /s/q C:\\Users\\Administrator\\AppData\\Roaming\\Autodesk\\MC3'</span>)
+
+<span class="cmt">#Delete Registry
+</span>os.system(<span class="str">'reg delete HKEY_CURRENT_USER\Software\Autodesk\MC3 /f'</span>)
+
+<span class="kw">def</span> getCurrentTime():
+    <span class="kw">return</span> time.strftime(<span class="str">'%Y-%m-%d %H:%M:%S'</span>, time.localtime(time.time()))
+
+<span class="cmt">#Creat log file
+</span>ls = os.linesep
+entry = getCurrentTime() + <span class="str">"  ==================Test_Case_001 Log Started==================\n"</span>
+
+<span class="cmt">#all.append(entry)
+</span>fobj = open(<span class="str">'C:\Users\Administrator\Desktop\log.txt'</span>,<span class="str">'a'</span>)
+<span class="cmt">#fobj = writelines(['%s%s' % (x,ls) for x in all])
+</span>fobj.writelines(entry)
+fobj.close()
+
+<span class="cmt">#First time launch Sample
+</span><span class="skw">doubleClick</span>(<img src="1378465617482.png" />)
+<span class="cmt">#click(Pattern("lIsInstaller.png").targetOffset(-29,1))
+</span><span class="skw">click</span>(<img src="InitMC3DemoU-1.png" />)
+<span class="skw">click</span>(<img src="N0.png" />)
+
+<span class="cmt">#DA init dialog pops up, click OK button to opt-in
+</span><span class="skw">click</span>(<img src="OK.png" />)
+
+all = []
+entry = getCurrentTime() + <span class="str">"  DA optted-in."</span>
+all.append(entry)
+
+<span class="skw">click</span>(Pattern(<img src="OK-1.png" />).similar(<span class="dig">0.81</span>))
+
+<span class="cmt">#Invoke CIP dialog
+</span><span class="skw">click</span>(<img src="Help.png" />)
+<span class="skw">click</span>(<img src="CustomerInvo.png" />)
+
+<span class="cmt">#Opt-in CIP
+</span><span class="skw">click</span>(Pattern(<img src="YesIwouldlik.png" />).targetOffset(-<span class="dig">115</span>,-<span class="dig">1</span>))
+<span class="skw">click</span>(<img src="OK-2.png" />)
+
+entry = getCurrentTime() + <span class="str">"  CIP optted-in."</span>
+all.append(entry)
+
+fobj = open(<span class="str">'C:\Users\Administrator\Desktop\log.txt'</span>,<span class="str">'a'</span>)
+fobj.writelines([<span class="str">'%s%s'</span> % (x,ls,) <span class="kw">for</span> x <span class="kw">in</span> all])
+fobj.close()
+
+<span class="skw">click</span>(<img src="1388047063659.png" />)
+<span class="skw">click</span>(<img src="OK-3.png" />)
+
+<span class="cmt">#for i in range(250):  #comments this line for demo
+</span><span class="kw">for</span> i <span class="kw">in</span> range(<span class="dig">2</span>):
+
+    fobj = open(<span class="str">'C:\Users\Administrator\Desktop\log.txt'</span>,<span class="str">'a'</span>)
+    fobj.writelines(getCurrentTime() + <span class="str">"  Loop  %s has been started...\n"</span> %(i+<span class="dig">1</span>))
+    fobj.close()
+    <span class="skw">click</span>(<img src="InitMC3DemoU-1.png" />)
+    <span class="skw">click</span>(<img src="N0.png" />)
+    <span class="skw">click</span>(<img src="OK-5.png" />)
+
+    <span class="cmt">#wait(150)   #comments this line for demo
+</span>
+    all = []
+    entry = getCurrentTime() + <span class="str">"  Avro log has been sent out."</span>
+    all.append(entry)
+    <span class="skw">click</span>(Pattern(<img src="Cancel.png" />).similar(<span class="dig">0.81</span>))
+    <span class="skw">click</span>(<img src="OK-3.png" />)
+
+    os.system(<span class="str">'copy C:\\Users\\Administrator\\AppData\\Roaming\\Autodesk\\SampleApp_test\\2006\\{5783F2D7-5001-0409-0000-0060B0CE6BBA}\\1.1.0.0\\MC3\\Avro\\*.avro C:\\Users\\Administrator\\Desktop\\Avro_bak'</span>)
+    entry = getCurrentTime() + <span class="str">"  Avro log of this session has been backed up."</span>
+    all.append(entry)
+
+    fobj = open(<span class="str">'C:\Users\Administrator\Desktop\log.txt'</span>,<span class="str">'a'</span>)
+    fobj.writelines([<span class="str">'%s%s'</span> % (x,ls,) <span class="kw">for</span> x <span class="kw">in</span> all])
+    fobj.close()
+
+<span class="skw">click</span>(Pattern(<img src="DSampleApp.png" />).targetOffset(<span class="dig">294</span>,<span class="dig">0</span>))
+
+fobj = open(<span class="str">'C:\Users\Administrator\Desktop\log.txt'</span>,<span class="str">'a'</span>)
+fobj.writelines(getCurrentTime() + <span class="str">"  ==================Test_Case_001 Complete==================\n"</span>)
+fobj.close()
+</pre>
+</body>
+</html>
